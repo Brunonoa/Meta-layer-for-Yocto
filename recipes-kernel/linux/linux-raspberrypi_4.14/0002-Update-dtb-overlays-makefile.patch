@@ -1,0 +1,17 @@
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index d71d427ae16a..e20ab7413f49 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -139,10 +139,12 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	uart1.dtbo \
+ 	upstream.dtbo \
+ 	upstream-aux-interrupt.dtbo \
++	tft24-resistive.dtbo \
+ 	vc4-fkms-v3d.dtbo \
+ 	vc4-kms-kippah-7inch.dtbo \
+ 	vc4-kms-v3d.dtbo \
+ 	vga666.dtbo \
++	waveshare35a.dtbo \
+ 	w1-gpio.dtbo \
+ 	w1-gpio-pullup.dtbo \
+ 	wittypi.dtbo

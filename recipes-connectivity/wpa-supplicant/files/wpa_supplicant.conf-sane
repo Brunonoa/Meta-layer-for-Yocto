@@ -1,0 +1,15 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=IT
+
+network={
+	key_mgmt=WPA-PSK
+	ssid="Telecom-14472937"
+	psk="vV3y8lVk4gTVl18gYTj3mVct"
+}
+
+# open network
+#network={
+#    key_mgmt=NONE
+#    ssid="<ssid>"
+#}

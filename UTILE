@@ -1,0 +1,30 @@
+per aver visibile fat partition, vai a recipe-core, base-files e togli commento
+
+qt-env.sh posizionato in recipes-qt5 aggiunto start al boot
+
+raspi2fb posizionato in recipes-graphics aggiunto start at boot
+
+aggiunto modifiche a config.txt, in yocto si fa attraverso rpi-config_git.bbappend:
+	echo "##Configuration for Waveshare3.5 Display" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "hdmi_force_hotplug=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "hdmi_cvt=480 320 60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "hdmi_group=2" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "hdmi_mode=87" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+
+	echo "disable_overscan=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "dtparam=audio=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "dtparam=spi=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "dtoverlay=tft35a,rotate=270,speed=32000000,fps=60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "gpu_mem=128" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+
+Per qtwebengine per risolvere errori:
+For Qtwebengine, following the same workaround here (removing INHERIT += "rm_work" and rebuilding Qtwebengine after invoking MACHINE=am57xx-evm bitbake -c cleansstate qtwebengine) did not resolve the error and I got the same error message.
+
+sudo apt-get install git build-essential python diffstat texinfo gawk chrpath dos2unix wget unzip socat doxygen libc6:i386 libncurses5:i386 libstdc++6:i386 libz1:i386 g++-multilib
+
+Solutions
+The exact solution for your machine may vary, but will probably be a combination of these options.
+Add RAM and/or swap. If you add enough, this will fix the problem. But depending on the situation, that might be too difficult or expensive to do.
+Build the heavy recipes by themselves, i.e. bitbake qtlocation && bitbake qtwebengine
+Set PARALLEL_MAKE = “-j 1” and/or BB_NUMBER_THREADS = “1” in local.conf. Combines well with #2.
+Keep rerunning the build (especially with #2 and #3). If/when this works, it’s probably because of some variable load on the build system.
