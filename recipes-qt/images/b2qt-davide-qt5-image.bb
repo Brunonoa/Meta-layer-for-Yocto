@@ -33,11 +33,11 @@ LIC_FILES_CHKSUM = "file://${QT_LICENSE};md5=948f8877345cd66106f11031977a4625"
 
 include recipes-qt/images/b2qt-embedded-qt5-image.bb
 
-SPLASH = "psplash-davide"
-IMAGE_FEATURES += "splash"
+#SPLASH = "psplash-davide"
+#IMAGE_FEATURES += "splash"
 
-#RDEPENDS_${PN}_remove += "boot2qt-appcontroller boot2qt-demos boot2qt-launcher"
-#IMAGE_INSTALL_remove += "packagegroup-b2qt-embedded-addons"
+RDEPENDS_${PN}_remove += "boot2qt-appcontroller boot2qt-demos boot2qt-launcher"
+IMAGE_INSTALL_remove += "packagegroup-b2qt-embedded-addons"
 
 ENABLE_UART = "1"
 ENABLE_SPI_BUS= "1"

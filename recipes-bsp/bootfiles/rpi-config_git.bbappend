@@ -5,18 +5,24 @@ RPI_PWM_2CHAN ?= ""
 RPI_I2S_AUDIO ?= ""
 
 do_deploy_append() {
+
+	echo "disable_splash=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "gpu_mem=128" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "#Disable overscan for removing black border around the splash" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "disable_overscan=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "dtparam=audio=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+	echo "dtparam=spi=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+
 	if [ "${RPI_PITFT35}" = "1" ]; then
 		echo "##Configuration for Waveshare3.5 Display" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "hdmi_force_hotplug=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "#hdmi_cvt=480 320 60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "#hdmi_group=2" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "#hdmi_mode=87" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
-
-		echo "disable_overscan=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
-		echo "dtparam=audio=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
-		echo "dtparam=spi=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+		echo "" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+		echo "For 3.5 inch display" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "dtoverlay=waveshare35a,rotate=270,speed=32000000,fps=60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
-		echo "gpu_mem=128" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+		
 	fi
 
 	if [ "$[RPI_PWM_2CHAN]" = "1"]; then

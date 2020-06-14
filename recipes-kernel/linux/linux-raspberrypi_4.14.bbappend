@@ -12,15 +12,24 @@ SRC_URI += "file://0002-Update-dtb-overlays-makefile.patch \
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+RPI_PITFT35 ?= ""
+RPI_NO_CONSOLE ?= ""
+
 # rimuovere console=serial0,115200 
-# CMDLINE for raspberrypi with pitft
-CMDLINE_PITFT = "dwc_otg.lpm_enable=0 console=tty1 console=serial0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=map:10 fbcon=font:ProFont6x11 logo.nologo"
+CMDLINE="dwc_otg.lpm_enable=0 console=tty1 console=serial0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait"
 
 do_deploy_append() {
-	if [ "${RPI_PITFT35}" = "1" ]; then	
-		install -d ${DEPLOYDIR}/bcm2835-bootfiles
-		echo "${CMDLINE_PITFT}" > ${DEPLOYDIR}/bcm2835-bootfiles/cmdline.txt
+
+	#if [ "${RPI_PITFT35}" = "1" ]; then	
+	#	PITFT=" fbcon=map:10 fbcon=font:ProFont6x11"
+	#fi
+
+	if [ ${RPI_NO_CONSOLE} = "1" ]; then
+		NO_CONSOLE=" consoleblank=0 loglevel=1 quiet logo.nologo"
 	fi
+
+	install -d ${DEPLOYDIR}/bcm2835-bootfiles
+	echo "${CMDLINE}${NO_CONSOLE}${PITFT}" > ${DEPLOYDIR}/bcm2835-bootfiles/cmdline.txt
 }
 
 
