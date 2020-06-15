@@ -1,0 +1,9 @@
+[Unit]
+Description=Application service
+DefaultDependencies=no
+
+[Service]
+ExecStart=/usr/bin/application
+
+[Install]
+WantedBy=basic.target

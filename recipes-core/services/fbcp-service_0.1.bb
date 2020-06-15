@@ -15,4 +15,6 @@ do_install_append() {
   install -m 0644 ${WORKDIR}/fbcp.service ${D}/${systemd_unitdir}/system
 }
 
+#RDEPENDS_${PN} += "fbcp"
+
 REQUIRED_DISTRO_FEATURES= "systemd"

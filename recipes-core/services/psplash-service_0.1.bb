@@ -28,5 +28,7 @@ do_install_append() {
 
 }
 
+RDEPENDS_${PN} += "fbida"
+
 REQUIRED_DISTRO_FEATURES= "systemd"
 
