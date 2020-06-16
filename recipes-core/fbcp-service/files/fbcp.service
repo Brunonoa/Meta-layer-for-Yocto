@@ -1,13 +1,11 @@
-#ExecStartPre=/bin/sleep 30
-
 [Unit]
 Description=Fbcp copy screen startup script
-After=network.target
+After=network.target 
 
 [Service]
-ExecStartPre=/bin/sleep 30
 ExecStart=/usr/bin/fbcp
 
 [Install]
 WantedBy=multi-user.target
+#ExecStartPre=/bin/sleep 30
 

@@ -20,7 +20,7 @@ do_deploy_append() {
 		echo "#hdmi_group=2" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "#hdmi_mode=87" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
-		echo "For 3.5 inch display" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+		echo "#For 3.5 inch display" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		echo "dtoverlay=waveshare35a,rotate=270,speed=32000000,fps=60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		
 	fi

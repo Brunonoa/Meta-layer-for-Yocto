@@ -1,8 +1,11 @@
 [Unit]
 Description=Application service
 DefaultDependencies=no
+Requires=fbcp.service
+After=fbcp.service
 
 [Service]
+ExecStartPre=/bin/sleep 30
 ExecStart=/usr/bin/application
 
 [Install]

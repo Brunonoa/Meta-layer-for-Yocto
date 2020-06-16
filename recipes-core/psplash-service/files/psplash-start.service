@@ -1,7 +1,8 @@
 [Unit]
 Description=Splash screen
-DefaultDependencies=no
-After=local-fs.target
+#DefaultDependencies=no
+Requires=fbcp.service
+After=local-fs.target fbcp.service
 
 [Service]
 ExecStart=/usr/bin/fbi -d /dev/fb0 --noverbose -t 20 -1 /lib/systemd/system/psplash-davide-img.png
@@ -10,5 +11,4 @@ StandardOutput=tty
 
 [Install]
 WantedBy=sysinit.target
-
 

@@ -13,17 +13,17 @@ SRC_URI += "file://0002-Update-dtb-overlays-makefile.patch \
 RPI_PITFT35 ?= ""
 RPI_NO_CONSOLE ?= ""
 
-# rimuovere console=serial0,115200 
-CMDLINE="dwc_otg.lpm_enable=0 console=tty1 console=serial0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait"
+# per aggiungere cosole su seriale console=serial0,115200
+CMDLINE="dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=font:ProFont6x11 logo.nologo"
 
 do_deploy_append() {
 
 	#if [ "${RPI_PITFT35}" = "1" ]; then	
-	#	PITFT=" fbcon=map:10 fbcon=font:ProFont6x11"
+	#	PITFT=" fbcon=map:10"
 	#fi
 
 	#if [ ${RPI_NO_CONSOLE} = "1" ]; then
-	#	NO_CONSOLE=" consoleblank=0 loglevel=1 quiet logo.nologo"
+	#	NO_CONSOLE=" consoleblank=0 loglevel=1 quiet"
 	#fi
 
 	install -d ${DEPLOYDIR}/bcm2835-bootfiles
