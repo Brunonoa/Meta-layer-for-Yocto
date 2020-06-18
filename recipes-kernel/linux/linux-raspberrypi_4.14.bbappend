@@ -16,18 +16,12 @@ RPI_NO_CONSOLE ?= ""
 # per aggiungere cosole su seriale console=serial0,115200
 CMDLINE="dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=font:ProFont6x11 logo.nologo"
 
+CMDLINE_append = ' ${@oe.utils.conditional("RPI_NO_CONSOLE", "1", "consoleblank=0 loglevel=1 quiet", "", d)}'
+#CMDLINE_append += ' ${@oe.utils.conditional("RPI_PITFT35", "1", "fbcon=map:10", "", d)}'
+
 do_deploy_append() {
-
-	#if [ "${RPI_PITFT35}" = "1" ]; then	
-	#	PITFT=" fbcon=map:10"
-	#fi
-
-	#if [ ${RPI_NO_CONSOLE} = "1" ]; then
-	#	NO_CONSOLE=" consoleblank=0 loglevel=1 quiet"
-	#fi
-
 	install -d ${DEPLOYDIR}/bcm2835-bootfiles
-	echo "${CMDLINE}${NO_CONSOLE}${PITFT}" > ${DEPLOYDIR}/bcm2835-bootfiles/cmdline.txt
+	echo "${CMDLINE}" > ${DEPLOYDIR}/bcm2835-bootfiles/cmdline.txt
 }
 
 

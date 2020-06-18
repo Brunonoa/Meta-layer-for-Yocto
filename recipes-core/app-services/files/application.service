@@ -1,12 +1,11 @@
 [Unit]
 Description=Application service
-DefaultDependencies=no
+#DefaultDependencies=no
 Requires=fbcp.service
-After=fbcp.service
+After=fbcp.service psplash-start.service
 
 [Service]
-ExecStartPre=/bin/sleep 30
-ExecStart=/usr/bin/application
+ExecStart=/usr/bin/application.sh
 
 [Install]
-WantedBy=basic.target
+WantedBy=fbcp.service

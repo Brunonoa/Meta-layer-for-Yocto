@@ -1,4 +1,0 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-SPLASH_IMAGES_append_rpi = " file://psplash-davide-img.h;outsuffix=davide"
-ALTERNATIVE_PRIORITY_psplash-davide[psplash] = "200"
-

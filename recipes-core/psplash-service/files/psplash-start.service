@@ -5,7 +5,8 @@ Requires=fbcp.service
 After=local-fs.target fbcp.service
 
 [Service]
-ExecStart=/usr/bin/fbi -d /dev/fb0 --noverbose -t 20 -1 /lib/systemd/system/psplash-davide-img.png
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/fbi -d /dev/fb0 --noverbose -t 30 -1 /lib/systemd/system/psplash-davide-img.png
 StandardInput=tty
 StandardOutput=tty
 

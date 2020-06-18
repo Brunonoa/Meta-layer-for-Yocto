@@ -7,22 +7,32 @@ inherit systemd
 SYSTEMD_AUTO_ENABLE = "enable"
 SYSTEMD_SERVICE_${PN} = "application.service"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
+#Service for starting the main application
 SRC_URI_append = " file://application.service"
 FILES_${PN} += "${systemd_unitdir}/system/application.service"	
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+#Files that compose the main application
 SRC_URI += "file://application.sh"
 FILES_${PN} += "/usr/bin/application.sh"
+
+#SRC_URI += "file://libraries.zip"
+#FILES_${PN} += "/usr/lib/libraries.zip"
 
 do_install_append() {
   install -d ${D}/${systemd_unitdir}/system
   install -m 0644 ${WORKDIR}/application.service ${D}/${systemd_unitdir}/system
 
-  # Load the splash screen in the same destination directory as the service
+  # Install the application files
   install -d ${D}/usr/bin
-  chmod +x ${WORKDIR}/application.sh
-  install -m 0644 ${WORKDIR}/application.sh ${D}/usr/bin
+  install -m 0755 ${WORKDIR}/application.sh ${D}/usr/bin
+
+  # Install the application files
+  #install -d ${D}/usr/lib
+  #install -m 0755 ${WORKDIR}/libraries.zip ${D}/usr/lib
 }
 
 REQUIRED_DISTRO_FEATURES= "systemd"
+RDEPENDS_${PN} += "bash"
 
