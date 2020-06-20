@@ -2,10 +2,10 @@
 Description=Application service
 #DefaultDependencies=no
 Requires=fbcp.service
-After=fbcp.service psplash-start.service
+After=fbcp.service
 
 [Service]
 ExecStart=/usr/bin/application.sh
 
 [Install]
-WantedBy=fbcp.service
+WantedBy=multi-user.target

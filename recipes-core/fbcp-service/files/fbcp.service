@@ -7,5 +7,4 @@ ExecStart=/usr/bin/fbcp
 
 [Install]
 WantedBy=multi-user.target
-#ExecStartPre=/bin/sleep 30
 

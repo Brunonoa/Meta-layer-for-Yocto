@@ -17,8 +17,8 @@ FILES_${PN} += "${systemd_unitdir}/system/application.service"
 SRC_URI += "file://application.sh"
 FILES_${PN} += "/usr/bin/application.sh"
 
-#SRC_URI += "file://libraries.zip"
-#FILES_${PN} += "/usr/lib/libraries.zip"
+SRC_URI += "file://gallery-mobile"
+FILES_${PN} += "/usr/lib/gallery-mobile"
 
 do_install_append() {
   install -d ${D}/${systemd_unitdir}/system
@@ -29,10 +29,12 @@ do_install_append() {
   install -m 0755 ${WORKDIR}/application.sh ${D}/usr/bin
 
   # Install the application files
-  #install -d ${D}/usr/lib
-  #install -m 0755 ${WORKDIR}/libraries.zip ${D}/usr/lib
+  install -d ${D}/usr/bin
+  install -m 0755 ${WORKDIR}/gallery-mobile ${D}/usr/bin
 }
 
 REQUIRED_DISTRO_FEATURES= "systemd"
 RDEPENDS_${PN} += "bash"
+
+RDEPENDS_${PN} += "libraries"
 
