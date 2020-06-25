@@ -34,7 +34,6 @@ do_install_append() {
 }
 
 REQUIRED_DISTRO_FEATURES= "systemd"
-RDEPENDS_${PN} += "bash"
 
-RDEPENDS_${PN} += "libraries"
+RDEPENDS_${PN} += "bash libraries qt5-env"
 

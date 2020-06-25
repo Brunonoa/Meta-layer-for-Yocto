@@ -1,6 +1,6 @@
 [Unit]
 Description=Fbcp copy screen startup script
-After=network.target 
+After=network.target getty@.service
 
 [Service]
 ExecStart=/usr/bin/fbcp
