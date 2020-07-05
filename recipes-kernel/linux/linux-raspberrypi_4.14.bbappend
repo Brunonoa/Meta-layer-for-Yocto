@@ -27,6 +27,8 @@ do_deploy_append() {
 	echo "${CMDLINE}" > ${DEPLOYDIR}/bcm2835-bootfiles/cmdline.txt
 }
 
+#KERNEL_DEVICETREE += "overlays/waveshare35.dtb0"
+
 
 
 

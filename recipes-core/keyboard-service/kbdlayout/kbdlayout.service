@@ -1,0 +1,9 @@
+[Unit]
+Description=Loads custom keymap if available
+ConditionPathExists=/etc/keymap.map
+
+[Service]
+ExecStart=/bin/sh -c '/usr/bin/loadkeys /etc/keymap.map'
+
+[Install]
+WantedBy=multi-user.target

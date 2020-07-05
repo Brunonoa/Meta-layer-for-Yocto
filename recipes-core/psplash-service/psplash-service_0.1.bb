@@ -25,7 +25,6 @@ do_install_append() {
   # Load the splash screen in the same destination directory as the service
   install -d ${D}/${systemd_unitdir}/system
   install -m 0644 ${WORKDIR}/psplash-davide-img.png ${D}/${systemd_unitdir}/system
-
 }
 
 RDEPENDS_${PN} += "fbida"

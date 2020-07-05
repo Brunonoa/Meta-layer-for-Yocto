@@ -1,0 +1,3 @@
+ACTION=="add", SUBSYSTEM=="module", KERNEL=="fb_ili9486", 
+RUN+="/usr/bin/fbcp"
+

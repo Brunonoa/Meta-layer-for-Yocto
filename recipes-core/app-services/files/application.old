@@ -1,0 +1,11 @@
+[Unit]
+Description=Application service
+#DefaultDependencies=no
+Requires=fbcp.service
+After=fbcp.service
+
+[Service]
+ExecStart=/usr/bin/application.sh
+
+[Install]
+WantedBy=multi-user.target

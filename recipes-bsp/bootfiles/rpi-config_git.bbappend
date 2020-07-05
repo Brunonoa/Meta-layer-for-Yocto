@@ -20,7 +20,8 @@ do_deploy_append() {
 		echo "hdmi_force_hotplug=1" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 
 		if [ "${RPI_PITFT35_ADAPTED}" = "1" ]; then
-			echo "hdmi_cvt=480 320 60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+			echo "#hdmi_cvt=480 320 60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+			echo "hdmi_cvt=1360 768 60" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 			echo "hdmi_group=2" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 			echo "hdmi_mode=87" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 		fi
