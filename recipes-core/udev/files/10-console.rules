@@ -1,0 +1,3 @@
+ACTION=="add", SUBSYSTEM=="module", KERNEL=="g_serial",                         
+RUN+="sleep 10 && systemctl enable getty@ttyGS0.service"
+

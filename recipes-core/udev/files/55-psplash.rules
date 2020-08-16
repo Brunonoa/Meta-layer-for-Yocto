@@ -1,4 +1,0 @@
-ACTION=="add", SUBSYSTEM=="module", KERNEL=="fb_ili9486", 
-RUN+="psplash-start.service"
-
-

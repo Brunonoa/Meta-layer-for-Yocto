@@ -32,7 +32,10 @@ DESCRIPTION = "B2Qt embedded Qt5 SDK toolchain"
 LICENSE = "The-Qt-Company-Commercial"
 LIC_FILES_CHKSUM = "file://${QT_LICENSE};md5=948f8877345cd66106f11031977a4625"
 
-include recipe-qt/meta/meta-toolchain-b2qt-embedded-qt5-sdk.bb
+inherit populate_b2qt_qt5_sdk
+
+TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-b2qt-embedded-qt5-toolchain-host"
+TOOLCHAIN_TARGET_TASK += "packagegroup-b2qt-embedded-qt5-toolchain-target"
 
 TOOLCHAIN_TARGET_TASK_append = " opencv"
 

@@ -1,9 +1,0 @@
-[Unit]
-Description=Application service
-#DefaultDependencies=no
-
-[Service]
-ExecStart=/usr/bin/application.sh
-
-[Install]
-WantedBy=multi-user.target

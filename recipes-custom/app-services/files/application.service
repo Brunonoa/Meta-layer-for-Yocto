@@ -1,0 +1,12 @@
+[Unit]
+Description=Application service
+#DefaultDependencies=no
+
+[Service]
+ExecStart=/usr/bin/application.sh
+#TimeoutStopSec=infinity
+#TimeoutStartSec=10
+#ExecStartPost=/bin/sleep 10
+
+[Install]
+WantedBy=multi-user.target

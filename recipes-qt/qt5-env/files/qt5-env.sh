@@ -33,14 +33,20 @@ export TSLIB_CONSOLEDEVICE=none
 export TSLIB_FBDEVICE=/dev/fb0
 export TSLIB_TSDEVICE=/dev/input/touchscreen0
 export TSLIB_PLUGINDIR=/usr/lib/ts
+export TSLIB_EBDEVICE=/dev/fb0
 #export QWS_MOUSE_PROTO='Tslib:/dev/input/event0'
 
 #export QT_QPA_EGLFS_DISABLE_INPUT=1
+export QT_QPA_EGLFS_ALWAYS_SET_MODE=1
 export QT_QPA_EGLFS_NO_LIBINPUT=1
-export QT_QPA_FB_TSLIB=1
+export QT_QPA_EGFLS_TSLIB=1
 #export QT_QPA_EGLFS_HIDECURSOR=1
 #export QT_QPA_EVDEV_MOUSE_PARAMETERS=abs
 export QT_QPA_EVDEV_TOUCHSCREEN_PARAMETERS=/dev/input/touchscreen0:rotate=270
+export QT_QPA_EVDEV_TOUCHSCREEN=/dev/input/event0:rotate=270
+
+#export QT_LOGGING_RULES=qt.qpa.input=true
+#export QT_DEBUG_PLUGINS=1
 
 if [ -z "${XDG_RUNTIME_DIR}" ]; then
     export XDG_RUNTIME_DIR=/tmp/user/${UID}

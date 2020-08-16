@@ -1,99 +1,118 @@
-/*
- * Device Tree overlay for waveshare 3.5inch TFT LCD
- *
- */
-
 /dts-v1/;
-/plugin/;
 
 / {
 	compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
 
 	fragment@0 {
-		target = <&spi0>;
+		target = <0xffffffff>;
+
 		__overlay__ {
 			status = "okay";
 
-			spidev@0{
+			spidev@0 {
 				status = "disabled";
 			};
 
-			spidev@1{
+			spidev@1 {
 				status = "disabled";
 			};
 		};
 	};
 
 	fragment@1 {
-		target = <&gpio>;
+		target = <0xffffffff>;
+
 		__overlay__ {
-			waveshare35a_pins: waveshare35a_pins {
-				brcm,pins = <17 25 24>;
-				brcm,function = <0 0 0>; /* in in in */
+
+			waveshare35a_pins {
+				brcm,pins = <0x11 0x19 0x18>;
+				brcm,function = <0x0 0x0 0x0>;
+				phandle = <0x1>;
 			};
 		};
 	};
 
 	fragment@2 {
-		target = <&spi0>;
+		target = <0xffffffff>;
+
 		__overlay__ {
-			/* needed to avoid dtc warning */
-			#address-cells = <1>;
-			#size-cells = <0>;
+			#address-cells = <0x1>;
+			#size-cells = <0x0>;
 
-			waveshare35a: waveshare35a@0{
+			waveshare35a@0 {
 				compatible = "ilitek,ili9486";
-				reg = <0>;
+				reg = <0x0>;
 				pinctrl-names = "default";
-				pinctrl-0 = <&waveshare35a_pins>;
-
-				spi-max-frequency = <16000000>;
-				txbuflen = <32768>;
-				rotate = <90>;
-				bgr = <0>;
-				fps = <30>;
-				buswidth = <8>;
-				regwidth = <16>;
-				reset-gpios = <&gpio 25 1>;
-				dc-gpios = <&gpio 24 0>;
-				debug = <0>;
-
-				init = <0x10000b0 0x00
-				        0x1000011
-					0x20000ff
-					0x100003a 0x55
-					0x1000036 0x28
-					0x10000c2 0x44
-					0x10000c5 0x00 0x00 0x00 0x00
-					0x10000e0 0x0f 0x1f 0x1c 0x0c 0x0f 0x08 0x48 0x98 0x37 0x0a 0x13 0x04 0x11 0x0d 0x00
-					0x10000e1 0x0f 0x32 0x2e 0x0b 0x0d 0x05 0x47 0x75 0x37 0x06 0x10 0x03 0x24 0x20 0x00
-					0x10000e2 0x0f 0x32 0x2e 0x0b 0x0d 0x05 0x47 0x75 0x37 0x06 0x10 0x03 0x24 0x20 0x00
-					/* piscreen -> waveshare35a */
-					0x1000036 0x28
-					0x1000011
-					0x1000029>;
+				pinctrl-0 = <0x1>;
+				spi-max-frequency = <0xf42400>;
+				txbuflen = <0x8000>;
+				rotate = <0x5a>;
+				bgr = <0x0>;
+				fps = <0x1e>;
+				buswidth = <0x8>;
+				regwidth = <0x10>;
+				reset-gpios = <0xffffffff 0x19 0x1>;
+				dc-gpios = <0xffffffff 0x18 0x0>;
+				debug = <0x0>;
+				init = <0x10000b0 0x0 0x1000011 0x20000ff 0x100003a 0x55 0x1000036 0x28 0x10000c2 0x44 0x10000c5 0x0 0x0 0x0 0x0 0x10000e0 0xf 0x1f 0x1c 0xc 0xf 0x8 0x48 0x98 0x37 0xa 0x13 0x4 0x11 0xd 0x0 0x10000e1 0xf 0x32 0x2e 0xb 0xd 0x5 0x47 0x75 0x37 0x6 0x10 0x3 0x24 0x20 0x0 0x10000e2 0xf 0x32 0x2e 0xb 0xd 0x5 0x47 0x75 0x37 0x6 0x10 0x3 0x24 0x20 0x0 0x1000036 0x28 0x1000011 0x1000029>;
+				phandle = <0x2>;
 			};
 
-			waveshare35a_ts: waveshare35a-ts@1 {
+			waveshare35a-ts@1 {
 				compatible = "ti,ads7846";
-				reg = <1>;
-
-				spi-max-frequency = <2000000>;
-				interrupts = <17 2>; /* high-to-low edge triggered */
-				interrupt-parent = <&gpio>;
-				pendown-gpio = <&gpio 17 1>;
-				ti,x-plate-ohms = /bits/ 16 <60>;
-				ti,pressure-max = /bits/ 16 <255>;
+				reg = <0x1>;
+				spi-max-frequency = <0x1e8480>;
+				interrupts = <0x11 0x2>;
+				interrupt-parent = <0xffffffff>;
+				pendown-gpio = <0xffffffff 0x11 0x1>;
+				ti,x-plate-ohms = [00 3c];
+				ti,pressure-max = [00 ff];
+				phandle = <0x3>;
 			};
 		};
 	};
+
 	__overrides__ {
-		speed =		<&waveshare35a>,"spi-max-frequency:0";
-		txbuflen =	<&waveshare35a>,"txbuflen:0";
-		rotate =	<&waveshare35a>,"rotate:0";
-		fps =		<&waveshare35a>,"fps:0";
-		bgr =		<&waveshare35a>,"bgr:0";
-		debug =		<&waveshare35a>,"debug:0";
-		swapxy =	<&waveshare35a_ts>,"ti,swap-xy?";
+		speed = <0x2 0x7370692d 0x6d61782d 0x66726571 0x75656e63 0x793a3000>;
+		txbuflen = [00 00 00 02 74 78 62 75 66 6c 65 6e 3a 30 00];
+		rotate = [00 00 00 02 72 6f 74 61 74 65 3a 30 00];
+		fps = [00 00 00 02 66 70 73 3a 30 00];
+		bgr = [00 00 00 02 62 67 72 3a 30 00];
+		debug = <0x2 0x64656275 0x673a3000>;
+		swapxy = <0x3 0x74692c73 0x7761702d 0x78793f00>;
+	};
+
+	__symbols__ {
+		waveshare35a_pins = "/fragment@1/__overlay__/waveshare35a_pins";
+		waveshare35a = "/fragment@2/__overlay__/waveshare35a@0";
+		waveshare35a_ts = "/fragment@2/__overlay__/waveshare35a-ts@1";
+	};
+
+	__fixups__ {
+		spi0 = "/fragment@0:target:0", "/fragment@2:target:0";
+		gpio = "/fragment@1:target:0", "/fragment@2/__overlay__/waveshare35a@0:reset-gpios:0", "/fragment@2/__overlay__/waveshare35a@0:dc-gpios:0", "/fragment@2/__overlay__/waveshare35a-ts@1:interrupt-parent:0", "/fragment@2/__overlay__/waveshare35a-ts@1:pendown-gpio:0";
+	};
+
+	__local_fixups__ {
+
+		fragment@2 {
+
+			__overlay__ {
+
+				waveshare35a@0 {
+					pinctrl-0 = <0x0>;
+				};
+			};
+		};
+
+		__overrides__ {
+			speed = <0x0>;
+			txbuflen = <0x0>;
+			rotate = <0x0>;
+			fps = <0x0>;
+			bgr = <0x0>;
+			debug = <0x0>;
+			swapxy = <0x0>;
+		};
 	};
 };

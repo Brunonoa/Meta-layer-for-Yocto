@@ -10,8 +10,7 @@ SRC_URI += "file://0002-Update-dtb-overlays-makefile.patch \
 	    file://tft24-resistive.dts;subdir=git/arch/${ARCH}/boot/dts/overlays \
 "
 
-RPI_PITFT35 ?= ""
-RPI_PITFT35_MAP ?= ""
+RPI_PITFT_MAP ?= ""
 RPI_NO_CONSOLE ?= ""
 RPI_SSH_USB ?= ""
 
@@ -19,7 +18,7 @@ RPI_SSH_USB ?= ""
 CMDLINE="dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=font:ProFont6x11 logo.nologo"
 
 CMDLINE_append = ' ${@oe.utils.conditional("RPI_NO_CONSOLE", "1", "consoleblank=0 loglevel=1 quiet", "", d)}'
-CMDLINE_append += ' ${@oe.utils.conditional("RPI_PITFT35_MAP", "1", "fbcon=map:10", "", d)}'
+CMDLINE_append += ' ${@oe.utils.conditional("RPI_PITFT_MAP", "1", "fbcon=map:10", "", d)}'
 CMDLINE_append += ' ${@oe.utils.conditional("RPI_SSH_USB", "1", "modules-load=dwc2,g_serial", "", d)}'
 
 do_deploy_append() {

@@ -1,10 +1,13 @@
 [Unit]
 Description=Fbcp copy screen startup script
-After=network.target getty@.service
+After=graphical.target
 
 [Service]
 ExecStart=/usr/bin/fbcp
+Restart=always
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
+
 

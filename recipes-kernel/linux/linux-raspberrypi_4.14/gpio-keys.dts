@@ -1,0 +1,94 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
+
+	fragment@0 {
+		target = <&gpio>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&board_pins>;
+			status = "okay";
+
+			board_pins: board_pins {
+				brcm,pins = <6 12 23 26 27 17 16 22 20 14 15>;
+				brcm,function = <0 0 0 0 0 0 0 0 0 0 0>; /* all in */
+				brcm,pull = <2 2 2 2 2 2 2 2 2 2 2>;
+			};
+		};
+	};
+	
+	fragment@1 {
+		target-path = "/soc";
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&board_pins>;
+			status = "okay";
+
+			keypad: keypad {
+				compatible = "gpio-keys";
+				autorepeat;
+				
+				button@12 {
+					label = "Test BTN1";
+					linux,code = <2>;
+					gpios = <&gpio 12 1>;
+				};
+
+				button@23 {
+					label = "Test BTN2";
+					linux,code = <3>;
+					gpios = <&gpio 23 1>;
+				};
+
+				button@26 {
+					label = "Test BTN3";
+					linux,code = <4>;
+					gpios = <&gpio 26 1>;
+				};
+
+				button@6 {
+					label = "Test BTN4";
+					linux,code = <5>;
+					gpios = <&gpio 6 1>;
+				};
+
+				joystick@17 {
+					label = "Test Joystick1";
+					linux,code = <103>;
+					gpios = <&gpio 17 1>;
+				};
+
+				joystick@16 {
+					label = "Test Joystick2";
+					linux,code = <105>;
+					gpios = <&gpio 16 1>;
+				};
+
+				joystick@22 {
+					label = "Test Joystick3";
+					linux,code = <108>;
+					gpios = <&gpio 22 1>;
+				};
+
+				joystick@20 {
+					label = "Test Joystick4";
+					linux,code = <106>;
+					gpios = <&gpio 20 1>;
+				};
+
+				start@14 {
+					label = "Test Start";
+					linux,code = <28>;
+					gpios = <&gpio 14 1>;
+				};
+
+				select@15 {
+					label = "Test Select";
+					linux,code = <57>;
+					gpios = <&gpio 15 1>;
+				};
+			};
+		};
+	};
+};
